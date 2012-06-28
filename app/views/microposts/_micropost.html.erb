@@ -1,0 +1,14 @@
+<% if(micropost.retweet == false || (micropost.retweet == true && !current_user?(micropost.user))) %>
+<li>
+  <span class="content"><%= wrap(micropost.content) %></span>
+  <span class="timestamp">
+      Posted <%= time_ago_in_words(micropost.created_at) %> ago
+      by <%= micropost.user.name %>
+  </span>
+  <span>
+    <% if micropost.user != current_user %>
+      <%= link_to("Retweet", retweet_micropost_path(micropost), :confirm => 'Retweet this to your followers?', :method => "post") %>
+    <% end %>
+  </span>
+</li>
+<%end%>

@@ -1,0 +1,20 @@
+<%= provide(:title, @title) %>
+<div class ="row">
+  <aside class ="span4">
+    <section>
+      <h1><%= @user.name %></h1>
+      <span><b>Tweets:</b> <%= @user.microposts.count %></span>
+    </section>
+     <%= render 'shared/stats' %>
+    </section>
+  </aside>
+  <div class="span8">
+    <h3><%= pluralize(@users.count, @title) %></h3>
+    <% if @users.any? %>
+      <ul class="users">
+        <%= render @users %>
+      </ul>
+      <%= will_paginate %>
+    <% end %>
+  </div>
+</div>
