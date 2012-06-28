@@ -19,7 +19,6 @@ class UsersController < ApplicationController
 
   def show
     @micropost = current_user.microposts.build
-    debugger
     @feed_items = @user.feed.paginate(page: params[:page])
   end
   
