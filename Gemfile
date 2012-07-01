@@ -31,3 +31,13 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+group :test do
+  gem 'capybara', '1.1.2'
+  gem 'launchy'
+  gem 'rspec-rails', '2.9.0'
+  gem 'spork', '0.9.0'
+  gem 'factory_girl_rails', '1.4.0'
+  gem 'cucumber-rails', '1.2.1', require: false
+  gem 'database_cleaner', '0.7.0'
+end

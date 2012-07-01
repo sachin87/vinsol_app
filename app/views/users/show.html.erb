@@ -18,7 +18,7 @@
      <ol class ="microposts">
        <%= render @feed_items %>
      </ol>
-     <%= will_paginate @feed_items %>
+     <%= will_paginate @feed_items, :remote => true %>
      <% end %>
    </div>
 </div>

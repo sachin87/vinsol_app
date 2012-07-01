@@ -11,7 +11,5 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_path
     end
   end
-
-  WillPaginate.per_page = 10
       
 end

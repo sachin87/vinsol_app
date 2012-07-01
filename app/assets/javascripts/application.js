@@ -13,15 +13,18 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= custom
 //= require_tree .
 
 jQuery(document).ready(function() {
 
   jQuery.fn.content_count_down = function() {
-    var content_size = jQuery('#micropost_content').val().length;
-    var difference = 140 - content_size;
-    var display_message = 'Now You can type ' + difference + ' characters';
-    jQuery('#content_text').html(display_message);
+    if(jQuery('#micropost_content').length > 0){
+      var content_size = jQuery('#micropost_content').val().length;
+      var difference = 140 - content_size;
+      var display_message = 'Now You can type ' + difference + ' characters';
+      jQuery('#content_text').html(display_message);
+    }
   }
 
   jQuery(this).content_count_down();
@@ -30,19 +33,38 @@ jQuery(document).ready(function() {
     jQuery(this).content_count_down();
   })
 
-  /*jQuery('#micropost_content').keydown(function(){
-    jQuery(this).content_count_down();
+  jQuery.fn.followers_count = function() {
+    jQuery.get('/relationships/total_followers', function(data) {
+      jQuery("#followers").html(data.followers);
+    });
+  }
+
+  jQuery("#post-form").live("click",function(){
+    jQuery.ajax({
+      url: jQuery(this).attr('action'),
+      data: jQuery(this).serializeArray(),
+      type: "POST",
+      dataType: 'HTML',
+      success: function(data) {
+        jQuery("#follow_form").html(data);
+        jQuery(this).followers_count();
+      }
+    });
+    return false;
   })
 
-jQuery('.delete-post').click(function(){
-  jQuery.ajax({
-    type: "DELETE",
-    url: jQuery(this).href(),
-    dataType: 'json',
-    success: function(data) {
-      jQuery('#feed_item_list').html(data);
-    }
-  });
-});*/
+  jQuery("#delete-form").live("click",function(){
+    jQuery.ajax({
+      url: jQuery(this).attr('action'),
+      data: jQuery(this).serializeArray(),
+      type: "DELETE",
+      dataType: 'HTML',
+      success: function(data) {
+        jQuery("#follow_form").html(data);
+        jQuery(this).followers_count();
+      }
+    });
+    return false;
+  })
 
 })

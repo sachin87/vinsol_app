@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :name
   
-  has_many :microposts
+  has_many :microposts, dependent: :destroy
   
   has_many :relationships, foreign_key: "follower_id",
                            dependent: :destroy
